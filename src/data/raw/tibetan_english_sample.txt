@@ -1,0 +1,10 @@
+ཁྱེད་རང་ག་འདྲས་ཡོད།	How are you?
+ང་བདེ་པོ་ཡིན།	I am well.
+ཐུགས་རྗེ་ཆེ།	Thank you.
+དགོངས་དག	Sorry/Excuse me.
+བཀྲ་ཤིས་བདེ་ལེགས།	Hello/Greetings.
+ཞོགས་པ་བདེ་ལེགས།	Good morning.
+མཚན་མོ་བདེ་ལེགས།	Good night.
+ཁྱེད་རང་གི་མིང་ལ་ག་རེ་ཞུ་གི་ཡོད།	What is your name?
+ངའི་མིང་ལ་_ཟེར་གྱི་ཡོད།	My name is _.
+དགའ་བསུ་ཞུ།	Welcome.
