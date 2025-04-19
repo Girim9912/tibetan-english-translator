@@ -20,3 +20,11 @@ This project aims to create a translation model that can convert text between Ti
 
 ## Usage
 To translate text using the command-line interface:
+python -m src.translate_cli --text "ཁྱེད་རང་ག་འདྲས་ཡོད།" --direction tib2eng
+python -m src.translate_cli --text "How are you?" --direction eng2tib
+
+## Progress
+- Repository created
+- Project structure initialized
+- Basic dictionary-based translator implemented
+- Command-line interface for translation
