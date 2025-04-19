@@ -7,7 +7,7 @@ def main():
     parser.add_argument('--text', '-t', required=True, help='Text to translate')
     parser.add_argument('--direction', '-d', choices=['tib2eng', 'eng2tib'], 
                         default='tib2eng', help='Translation direction')
-    parser.add_argument('--dictionary', '-dict', default='data/processed/simple_dictionary.txt',
+    parser.add_argument('--dictionary', '-dict', default='src/data/raw/simple_dictionary.txt',
                         help='Path to dictionary file')
     
     args = parser.parse_args()
