@@ -6,10 +6,13 @@ def collect_english_texts(max_texts=1000):
     """Collect monolingual English texts from Wikipedia"""
     english_texts = []
     
-    # Wikipedia API for English articles
-    wiki_en = wikipediaapi.Wikipedia('en')
+    # Wikipedia API for English articles - add proper user agent
+    wiki_en = wikipediaapi.Wikipedia(
+        user_agent='tibetan-english-translator-project/1.0 (https://github.com/Girim9912/tibetan-english-translator)',
+        language='en'
+    )
     
-    # Get content from some general topics
+    # Rest of the function remains the same
     topics = ['History', 'Science', 'Culture', 'Geography', 'Philosophy', 
               'Education', 'Technology', 'Art', 'Music', 'Literature']
     

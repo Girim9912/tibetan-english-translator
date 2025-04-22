@@ -1,7 +1,15 @@
 numpy
 pandas
+torch
 matplotlib
 jupyter
 scikit-learn
-tensorflow
 requests
+transformers 
+datasets 
+sacrebleu 
+sacremoses 
+beautifulsoup4 
+requests
+tensorflow
+wikipediaapi
