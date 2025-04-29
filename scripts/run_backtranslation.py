@@ -98,7 +98,7 @@ def iterative_back_translation(mono_en_texts, mono_tib_texts, initial_parallel_d
         # 3. Translate Tibetan monolingual data to English
         print("Translating Tibetan texts to English...")
         tib_to_en_synthetic = pipeline.generate_synthetic_data(
-            mono_tib_texts, 
+            mono_tib_texts,     
             pipeline.tib_en_model, 
             pipeline.tib_en_tokenizer
         )

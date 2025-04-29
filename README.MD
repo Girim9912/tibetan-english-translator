@@ -1,33 +1,118 @@
-# Tibetan-English Translator
+# Tibetan-English Neural Machine Translation
 
-A machine translation system for translating between Tibetan and English languages.
+This repository contains code for neural machine translation between Tibetan and English. The project implements both a baseline model and an improved model with state-of-the-art techniques.
 
-## Project Overview
-This project aims to create a translation model that can convert text between Tibetan and English. The development follows a step-by-step approach, starting with basic dictionary-based translation and eventually implementing neural machine translation techniques.
+## New Features and Improvements
+
+Our latest update includes significant improvements to the translation model:
+
+- **Added adapter-based fine-tuning** using pre-trained mT5 model for improved efficiency and performance
+- **Enhanced Tibetan-specific preprocessing** for better handling of Tibetan script
+- **Improved training process** with cosine annealing learning rate scheduling
+- **Multi-metric evaluation** using BLEU, METEOR, chrF, and TER metrics
+- **Mixed precision training** for faster training and larger batch sizes
+- **Advanced error analysis** including length-based evaluation and error pattern detection
 
 ## Project Structure
-- `data/`: Dataset storage
-- `src/`: Source code
-- `notebooks/`: Jupyter notebooks for exploration and experimentation
-- `models/`: Saved model files
-- `docs/`: Documentation
 
-## Setup Instructions
-1. Clone this repository
-2. Create a virtual environment: `python -m venv venv`
-3. Activate the virtual environment: `venv\Scripts\activate` (Windows) or `source venv/bin/activate` (Linux/Mac)
-4. Install dependencies: `pip install -r requirements.txt`
+```
+tibetan-english-translator/
+├── data/               # Data preprocessing scripts and utilities
+├── models/             # Model implementations
+│   ├── baseline/       # Original baseline model
+│   └── improved_translator.py  # New improved adapter-based model
+├── scripts/            # Training and evaluation scripts
+│   ├── train_improved_model.py  # Training script for the improved model
+│   └── evaluate_model.py        # Comprehensive evaluation script
+└── README.md
+```
 
-## Usage
-To translate text using the command-line interface:
+## Requirements
 
-python -m src.translate_cli --text "ཁྱེད་རང་ག་འདྲས་ཡོད།" --direction tib2eng
+Install the required packages using:
 
-python -m src.translate_cli --text "How are you?" --direction eng2tib
+```bash
+pip install torch transformers datasets evaluate accelerate wandb
+```
 
+Additional requirements:
+- `adapters` - For efficient adapter-based fine-tuning
+- `tqdm` - For progress bars
+- `sentencepiece` - For tokenization
 
-## Progress
-- Repository created
-- Project structure initialized
-- Basic dictionary-based translator implemented
-- Command-line interface for translation
+## Using the Improved Model
+
+### Training
+
+To train the improved model with adapter-based fine-tuning:
+
+```bash
+python scripts/train_improved_model.py \
+  --data_dir ./data \
+  --output_dir ./outputs \
+  --pretrained_model google/mt5-small \
+  --num_epochs 10 \
+  --batch_size 16 \
+  --learning_rate 5e-5 \
+  --fp16
+```
+
+For more options, run:
+```bash
+python scripts/train_improved_model.py --help
+```
+
+### Evaluation
+
+To evaluate the model:
+
+```bash
+python scripts/evaluate_model.py \
+  --model_path ./outputs/best_adapter \
+  --pretrained_model google/mt5-small \
+  --source_file ./data/test.bo \
+  --target_file ./data/test.en
+```
+
+## Technical Details
+
+### Adapter-based Fine-tuning
+
+The improved model uses adapter-based fine-tuning, which:
+1. Keeps most of the pre-trained model parameters frozen
+2. Only trains small adapter modules inserted into the Transformer layers
+3. Dramatically reduces the number of trainable parameters (typically <5% of the full model)
+4. Enables efficient training on limited computational resources
+
+### Tibetan-specific Processing
+
+The model implements special handling for Tibetan script:
+- Unicode normalization to NFC form (recommended for Tibetan)
+- Special handling of Tibetan-specific punctuation like shad (།)
+- Proper syllable boundary detection
+
+### Learning Rate Scheduling
+
+We use Cosine Annealing with Warm Restarts for the learning rate schedule, which:
+- Starts with a warmup period
+- Follows a cosine decay pattern
+- Periodically restarts the learning rate to help escape local minima
+
+## Citation
+
+If you use this code, please cite:
+
+```
+@misc{tibetan-english-translator,
+  author = {Original Authors and Contributors},
+  title = {Tibetan-English Neural Machine Translation},
+  year = {2023},
+  publisher = {GitHub},
+  journal = {GitHub Repository},
+  howpublished = {\url{https://github.com/Girim9912/tibetan-english-translator}}
+}
+```
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
